@@ -2,7 +2,7 @@
 from PyQt5 import QtWidgets
 from ui_pycalculator import Ui_MainWindow
 
-
+# Start
 class CalculatorWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     firstNumber = None
