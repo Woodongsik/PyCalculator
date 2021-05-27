@@ -28,7 +28,9 @@ class CalculatorWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.btn_decimal.clicked.connect(self.decimal_press)
 
         self.btn_plusMinus.clicked.connect(self.unary_operation_pressed)
-        self.btn_porcent.clicked.connect(self.unary_operation_pressed)
+        
+        # 아래 porcent 오타를 percent로 수정함
+        self.btn_percent.clicked.connect(self.unary_operation_pressed)
 
         self.btn_add.clicked.connect(self.binary_operation_pressed)
         self.btn_subtract.clicked.connect(self.binary_operation_pressed)
