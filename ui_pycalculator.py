@@ -20,16 +20,23 @@ class Ui_MainWindow(object):
         self.label_process = QtWidgets.QLabel(self.centralwidget)
         self.label_process.setGeometry(QtCore.QRect(0, 0, 241, 59))
         self.label_process.setStyleSheet(
-            "QLabel { qproperty-alignment: \'AlignVCenter | AlignRight\'; border: 1px solid gray; font: 600 16pt; background-color: rgb(153, 204, 255);\n}"
+            "QLabel { qproperty-alignment: \'AlignVCenter | AlignRight\'; border: 1px solid gray; background-color: rgb(153, 204, 255);\n}"
             "\n"
             "")
         self.label_process.setObjectName("label_process")
 
+        # 취소버튼
+        self.btn_cancel = QtWidgets.QPushButton(self.centralwidget)
+        self.btn_cancel.setGeometry(QtCore.QRect(0, 60, 61, 61))
+        self.btn_cancel.setStyleSheet(
+            " QPushButton { background-color: rgb(153, 0, 0); color: white; border: 1px solid gray; } QPushButton:pressed { background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #BEBEBE, stop: 1 #D7D7D7); }")
+        self.btn_cancel.setObjectName("btn_cancel")
+        #self.btn_equals.setStyleSheet("QPushButton { background-color: #34C0D7; color: white; border: 1px solid gray; } QPushButton:pressed { background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #0CADB7, stop: 1 #34C0D7); }")
 
 
         # 입력한결과창
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(0, 60, 241, 59))
+        self.label.setGeometry(QtCore.QRect(62, 60, 178, 59))
         self.label.setStyleSheet("QLabel { qproperty-alignment: \'AlignVCenter | AlignRight\'; border: 1px solid gray; font: 600 16pt; background-color : white;\n}"
 "\n"
 "")
@@ -127,6 +134,7 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "Pycalculator"))
         self.label.setText(_translate("MainWindow", "0"))
         self.label_process.setText(_translate("MainWindow", "Process"))
+        self.btn_cancel.setText(_translate("MainWindow", "Cancel"))
         self.btn_clear.setText(_translate("MainWindow", "C"))
         self.btn_plusMinus.setText(_translate("MainWindow", "+/-"))
         self.btn_percent.setText(_translate("MainWindow", "%"))
