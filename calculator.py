@@ -5,7 +5,7 @@ from ui_pycalculator import Ui_MainWindow
 # Start
 class CalculatorWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
-    firstNumber = None
+    firstNumber = None                         # 첫번째 입력된 숫자
     isUserTypingSecondNumber = False
 
     def __init__(self):
@@ -47,6 +47,7 @@ class CalculatorWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def digit_press(self):
         button = self.sender()
 
+        #4칙연산 버튼이 눌러졌을경우
         if ((self.btn_add.isChecked() or self.btn_subtract.isChecked() or
              self.btn_multiply.isChecked() or self.btn_divide.isChecked()) and
                 not self.isUserTypingSecondNumber):
@@ -56,6 +57,7 @@ class CalculatorWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
             self.isUserTypingSecondNumber = True
 
+        #4칙연산버튼은 눌러지지 않았고, 숫자가 눌러졌을경우
         else:
             if (("." in self.label.text()) and (button.text() == "0")):
                 newLabel = format(
@@ -66,10 +68,12 @@ class CalculatorWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         self.label.setText(newLabel)
 
+    #소수점 '.'버튼이 눌러졌을경우
     def decimal_press(self):
         self.label.setText(self.label.text() + ".")
         self.btn_decimal.setEnabled(False)
 
+    #버튼+/-'가 눌러졌거나, %가 눌러졌을때"
     def unary_operation_pressed(self):
         button = self.sender()
         labelNumber = float(self.label.text())
@@ -89,6 +93,7 @@ class CalculatorWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         button.setChecked(True)
 
+    #=버튼이 눌러졌을꼉우'
     def equals_pressed(self):
         secondNumber = float(self.label.text())
 
