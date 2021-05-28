@@ -8,6 +8,7 @@ class CalculatorWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     firstNumber = None                         # 첫번째 입력된 숫자
     secondNumber = None                        # 두번째 숫자를 저장함
     labelNumber = None                         # 계산결과를 저장함
+    totalNumber = '0'
 
     isUserTypingSecondNumber = False
     isTheFirstTime = True                      # label_process가 처음 시작된것인지 체크
@@ -57,16 +58,14 @@ class CalculatorWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def digit_press(self):
         button = self.sender()
 
-        # 4칙연산 버튼이 눌러졌을경우
         if ((self.btn_add.isChecked() or self.btn_subtract.isChecked() or
              self.btn_multiply.isChecked() or self.btn_divide.isChecked()) and
                 not self.isUserTypingSecondNumber):
 
             newLabel = format(float(button.text()), ".15g")
             self.btn_decimal.setEnabled(True)
-            self.isUserTypingSecondNumber = True            # 유저가 두번째 수를 입력하는걸 채크
+            self.isUserTypingSecondNumber = True
 
-        # 4칙연산버튼은 눌러지지 않았고, 숫자가 눌러졌을경우
         else:
             if (("." in self.label.text()) and (button.text() == "0")):
                 newLabel = format(
@@ -74,10 +73,10 @@ class CalculatorWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             else:
                 newLabel = format(
                     float(self.label.text() + button.text()), ".15g")
-            self.firstNumber = float(self.label.text() + button.text())
+
+        self.label.setText(newLabel)
 
         print("입력된숫자:", self.firstNumber)
-        self.label.setText(newLabel)
 
     # 소수점 '.'버튼이 눌러졌을경우
     def decimal_press(self):
@@ -105,7 +104,16 @@ class CalculatorWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     #캔슬버튼이 눌러졌을때
     def cancel_pressed(self):
+        print("firstNum:", self.firstNumber, ', secondNum:', self.secondNumber)
         print("취소버튼 눌러지!")
+        if self.totalNumber != '0':
+            tmp_newLabel = format(self.totalNumber, ".7g")
+            self.label.setText(tmp_newLabel)
+        else:
+            self.label.setText('0')
+        self.isUserTypingSecondNumber = False
+
+
 
     # =버튼이 눌러졌을꼉우'
     def equals_pressed(self):
@@ -113,6 +121,7 @@ class CalculatorWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         if self.btn_add.isChecked():
             labelNumber = self.firstNumber + self.secondNumber
+            self.totalNumber = labelNumber
             self.set_calculation_record('+')
             newLabel = format(labelNumber, ".15g")
             self.label.setText(newLabel)
@@ -120,14 +129,15 @@ class CalculatorWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         elif self.btn_subtract.isChecked():
             labelNumber = self.firstNumber - self.secondNumber
+            self.totalNumber = labelNumber
             self.set_calculation_record('-')
-
             newLabel = format(labelNumber, ".15g")
             self.label.setText(newLabel)
             self.btn_subtract.setChecked(False)
 
         elif self.btn_multiply.isChecked():
             labelNumber = self.firstNumber * self.secondNumber
+            self.totalNumber = labelNumber
             self.set_calculation_record('x')
             newLabel = format(labelNumber, ".15g")
             self.label.setText(newLabel)
@@ -135,8 +145,9 @@ class CalculatorWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         elif self.btn_divide.isChecked():
             labelNumber = self.firstNumber / self.secondNumber
+            self.totalNumber = labelNumber
             self.set_calculation_record('/')
-            newLabel = format(labelNumber, ".15g")
+            newLabel = format(labelNumber, ".5g")
             self.label.setText(newLabel)
             self.btn_divide.setChecked(False)
 
@@ -150,9 +161,10 @@ class CalculatorWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.btn_divide.setChecked(False)
         self.isUserTypingSecondNumber = False
         self.calculation_record = ""
-        self.label_process.setText("Process")
+        self.label_process.setText("Calculation Log")
         self.label.setText("0")
         self.isTheFirstTime = True
+        self.totalNumber = '0'
 
 
     def set_calculation_record(self, operator):

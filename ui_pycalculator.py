@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from PyQt5 import QtGui
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -15,6 +15,10 @@ class Ui_MainWindow(object):
         MainWindow.resize(241, 421)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
+
+        #계산기 아이콘
+        self.setWindowIcon(QtGui.QIcon('icon.png'))
+
 
         # 과정표시해주는 윈도우창 설정
         self.label_process = QtWidgets.QLabel(self.centralwidget)
@@ -46,7 +50,7 @@ class Ui_MainWindow(object):
         # 클리어버튼
         self.btn_clear = QtWidgets.QPushButton(self.centralwidget)
         self.btn_clear.setGeometry(QtCore.QRect(0, 120, 61, 61))
-        self.btn_clear.setStyleSheet(" QPushButton { background-color: rgb(215, 215, 215); border: 1px solid gray; } QPushButton:pressed { background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #BEBEBE, stop: 1 #D7D7D7); }")
+        self.btn_clear.setStyleSheet(" QPushButton { background-color: rgb(160, 160, 160); border: 1px solid gray; } QPushButton:pressed { background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #BEBEBE, stop: 1 #D7D7D7); }")
         self.btn_clear.setObjectName("btn_clear")
 
 
@@ -129,13 +133,15 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+
+
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Pycalculator"))
         self.label.setText(_translate("MainWindow", "0"))
-        self.label_process.setText(_translate("MainWindow", "Process"))
+        self.label_process.setText(_translate("MainWindow", "Calculation Log"))
         self.btn_cancel.setText(_translate("MainWindow", "Cancel"))
-        self.btn_clear.setText(_translate("MainWindow", "C"))
+        self.btn_clear.setText(_translate("MainWindow", "Clear"))
         self.btn_plusMinus.setText(_translate("MainWindow", "+/-"))
         self.btn_percent.setText(_translate("MainWindow", "%"))
         self.btn_divide.setText(_translate("MainWindow", "÷"))
