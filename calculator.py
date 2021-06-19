@@ -2,17 +2,17 @@
 from PyQt5 import QtWidgets
 from ui_pycalculator import Ui_MainWindow
 
+# calculator.py contains all functions of what to do when a button is clicked on PyCalculator
 
-# Start
 class CalculatorWindow(QtWidgets.QMainWindow, Ui_MainWindow):
-    firstNumber = None                         # 첫번째 입력된 숫자
-    secondNumber = None                        # 두번째 숫자를 저장함
-    labelNumber = None                         # 계산결과를 저장함
+    firstNumber = None
+    secondNumber = None
+    labelNumber = None
     totalNumber = '0'
 
     isUserTypingSecondNumber = False
-    isTheFirstTime = True                      # label_process가 처음 시작된것인지 체크
-    calculation_record = ""                    # 지금까지 계산한 기록을 저장
+    isTheFirstTime = True
+    calculation_record = ""
 
 
     def __init__(self):
@@ -76,11 +76,9 @@ class CalculatorWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         self.label.setText(newLabel)
 
-
     def decimal_press(self):
         self.label.setText(self.label.text() + ".")
         self.btn_decimal.setEnabled(False)
-
 
     def unary_operation_pressed(self):
         button = self.sender()
@@ -94,13 +92,11 @@ class CalculatorWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         newLabel = format(labelNumber, ".15g")
         self.label.setText(newLabel)
 
-
     def binary_operation_pressed(self):
         button = self.sender()
         self.firstNumber = float(self.label.text())
         button.setChecked(True)
 
-    # when cancel button, clicked
     def cancel_pressed(self):
         if self.totalNumber != '0':
             tmp_newLabel = format(self.totalNumber, ".7g")
@@ -108,7 +104,6 @@ class CalculatorWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         else:
             self.label.setText('0')
         self.isUserTypingSecondNumber = False
-
 
     def equals_pressed(self):
         self.secondNumber = float(self.label.text())
@@ -147,7 +142,6 @@ class CalculatorWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         self.isUserTypingSecondNumber = False
 
-
     def clear_pressed(self):
         self.btn_add.setChecked(False)
         self.btn_subtract.setChecked(False)
@@ -159,7 +153,6 @@ class CalculatorWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.label.setText("0")
         self.isTheFirstTime = True
         self.totalNumber = '0'
-
 
     def set_calculation_record(self, operator):
         if (self.isTheFirstTime):
