@@ -38,7 +38,7 @@ class CalculatorWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         self.btn_cancel.clicked.connect(self.cancel_pressed)
 
-        # 아래 porcent 오타를 percent로 수정함
+        # amend a typo (from porcent to percent)
         self.btn_percent.clicked.connect(self.unary_operation_pressed)
 
         self.btn_add.clicked.connect(self.binary_operation_pressed)
@@ -76,14 +76,12 @@ class CalculatorWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         self.label.setText(newLabel)
 
-        print("입력된숫자:", self.firstNumber)
 
-    # 소수점 '.'버튼이 눌러졌을경우
     def decimal_press(self):
         self.label.setText(self.label.text() + ".")
         self.btn_decimal.setEnabled(False)
 
-    # 버튼+/-'가 눌러졌거나, %가 눌러졌을때"
+
     def unary_operation_pressed(self):
         button = self.sender()
         labelNumber = float(self.label.text())
@@ -96,16 +94,14 @@ class CalculatorWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         newLabel = format(labelNumber, ".15g")
         self.label.setText(newLabel)
 
+
     def binary_operation_pressed(self):
         button = self.sender()
-
         self.firstNumber = float(self.label.text())
         button.setChecked(True)
 
-    #캔슬버튼이 눌러졌을때
+    # when cancel button, clicked
     def cancel_pressed(self):
-        print("firstNum:", self.firstNumber, ', secondNum:', self.secondNumber)
-        print("취소버튼 눌러지!")
         if self.totalNumber != '0':
             tmp_newLabel = format(self.totalNumber, ".7g")
             self.label.setText(tmp_newLabel)
@@ -114,8 +110,6 @@ class CalculatorWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.isUserTypingSecondNumber = False
 
 
-
-    # =버튼이 눌러졌을꼉우'
     def equals_pressed(self):
         self.secondNumber = float(self.label.text())
 
